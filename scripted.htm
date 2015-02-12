@@ -3,29 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>Hello scripted world</title>
-	<script type="text/javascript">
-	// declare global vars to hold all links
-	var tabLinks;
-	var tabPanels;
-
-	window.onload = function() {
-		tabLinks = document.getElementById("tabs").getElementByTagName("li");
-		tabPanels = document.getElementbyId("containers").getElementByTagName("div");
-		displayPanel(tabLinks[0]);
-
-		for(var i = 0; i < tabLinks.length; i++) {
-			tabLinks[i].onclick = function () {
-				displayPanel(this);
-				return false;
-			}
-		}
-	}
-
-	function displayPanel() {
-		// respond to tab clicks
-		// change panel display, activate tabs
-	}
-	</script>
 </head>
 <body>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel dui ante, et sagittis lectus. Quisque suscipit vehicula ligula sodales semper. Donec viverra tempus leo, facilisis sagittis arcu suscipit eget. Aliquam nec sapien leo, non tincidunt tellus. Nulla egestas varius ante ac rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet sodales erat, a ultrices ligula tristique sit amet.</p>
@@ -56,4 +33,43 @@
 		</div>
 	</aside>
 </body>
+<script type="text/javascript">
+	// declare global vars to hold all links
+	var tabLinks;
+	var tabPanels;
+
+	window.onload = function() {
+		tabLinks = document.getElementById("tabs").getElementByTagName("li");
+		tabPanels = document.getElementbyId("containers").getElementByTagName("div");
+		displayPanel(tabLinks[0]);
+
+		for(var i = 0; i < tabLinks.length; i++) {
+			tabLinks[i].onclick = function () {
+				displayPanel(this);
+				return false;
+			}
+			tabLinks[i].onfocus = function () {
+				displayPanel(this);
+				return false;
+			}
+		}
+	}
+
+	function displayPanel(tabToActivate) {
+		for(var i = 0; i < tabLinks.length; i++) {
+			if(tabLinks[i] == tabToActivate) {
+				// if it's activated, change its class
+				tabLinks[i].classList.add("active");
+				// and display the panel
+				tabPanels[i].style.display = "block";
+			}
+			else {
+				// remove active class
+				tabLinks[i].classList.remove("active");
+				// and set display to none
+				tabPanels[i].style.display = "none";
+			}
+		}
+	}
+	</script>
 </html>
